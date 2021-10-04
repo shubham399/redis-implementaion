@@ -15,12 +15,17 @@ const echoHandler = (socket, data) => {
   socket.write(getBulkStringReply(data.join(" ")))
 }
 
-const setHandler = (socket,data) => {
+const setHandler = (socket, data) => {
   console.log(data)
   mem[data[0]] = data[1];
+  if (data[2].toUpperCase() === "PX") {
+    setTimeout(() => {
+      mem[data[0]] = null;
+    }, data[3])
+  }
   socket.write(getSimpleString("OK"))
 }
-const getHandler = (socket,data) => {
+const getHandler = (socket, data) => {
   socket.write(getBulkStringReply(mem[data[0]]))
 }
 
