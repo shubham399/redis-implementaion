@@ -1,4 +1,5 @@
 const net = require("net");
+let mem = {}
 
 const getSimpleString = str => "+" + str + "\r\n"
 const getBulkStringReply = str => str ? `\$${str.length}\r\n${str}\r\n` : "$-1\r\n"
@@ -6,7 +7,6 @@ const getErrorString = str => "-" + str + "\r\n"
 const getIntegerResponse = str => ":" + str + "\r\n"
 
 
-let mem = {}
 
 const pingHandler = (socket) => {
   socket.write(getSimpleString("PONG"))
@@ -16,6 +16,7 @@ const echoHandler = (socket, data) => {
 }
 
 const setHandler = (socket,data) => {
+  console.log(data)
   mem[data[0]] = data[1];
   socket.write(getSimpleString("OK"))
 }
