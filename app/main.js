@@ -11,7 +11,6 @@ const pingHandler = (socket) => {
 
 const server = net.createServer((socket) => {
   const dataHandler = (buffer) => {
-    console.log("REQUEST", buffer.toString('utf-8'))
     // Do it in stream instead of Buffering it
     const data = buffer.toString('utf-8').toUpperCase().trim().split(/\s/).filter(a => a !== "").filter(a => a[0] !== "$");
     const command = data[1]
