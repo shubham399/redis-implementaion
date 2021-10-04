@@ -5,14 +5,23 @@ const getBulkStringReply = str => str ? `\$${str.length}\r\n${str}\r\n` : "$-1\r
 const getErrorString = str => "-" + str + "\r\n"
 const getIntegerResponse = str => ":" + str + "\r\n"
 
+
+let mem = {}
+
 const pingHandler = (socket) => {
   socket.write(getSimpleString("PONG"))
 }
 const echoHandler = (socket, data) => {
-  console.log(data.join(" "))
   socket.write(getBulkStringReply(data.join(" ")))
 }
 
+const setHandler = (socket,data) => {
+  mem[data[0]] = data[1];
+  socket.write(getSimpleString("OK"))
+}
+const getHandler = (socket,data) => {
+  socket.write(getBulkStringReply(mem[data[0]]))
+}
 
 const server = net.createServer((socket) => {
   const dataHandler = (buffer) => {
@@ -26,6 +35,12 @@ const server = net.createServer((socket) => {
         break;
       case 'ECHO':
         echoHandler(socket, data.slice(2))
+        break;
+      case 'SET':
+        setHandler(socket, data.slice(2))
+        break;
+      case 'GET':
+        getHandler(socket, data.slice(2))
         break;
       default:
         socket.write("\n")
