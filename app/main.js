@@ -18,7 +18,7 @@ const echoHandler = (socket, data) => {
 const setHandler = (socket, data) => {
   console.log(data)
   mem[data[0]] = data[1];
-  if (data[2].toUpperCase() === "PX") {
+  if (data[2] && data[2].toUpperCase() === "PX") {
     setTimeout(() => {
       mem[data[0]] = null;
     }, data[3])
