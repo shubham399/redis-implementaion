@@ -16,7 +16,6 @@ const echoHandler = (socket, data) => {
 }
 
 const setHandler = (socket, data) => {
-  console.log(data)
   mem[data[0]] = data[1];
   if (data[2] && data[2].toUpperCase() === "PX") {
     setTimeout(() => {
@@ -31,7 +30,6 @@ const getHandler = (socket, data) => {
 
 const server = net.createServer((socket) => {
   const dataHandler = (buffer) => {
-    // Do it in stream instead of Buffering it.
     const data = buffer.toString('utf-8').trim().split(/\s/).filter(a => a !== "").filter(a => a[0] !== "$");
     const command = data[1].toUpperCase()
     console.log('Request from', socket.remoteAddress, 'port', socket.remotePort, command);
