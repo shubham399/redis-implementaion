@@ -44,7 +44,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
     else if (op === "FB") {
 
       data = data.substring(6); // Don't know what it is
-      const parts = inputHexString.split(/00(?!FF)/);
+      const parts = data.split(/00(?!FF)/);
       for (part of parts) {
         console.log("🚀 ~ file: main.js:48 ~ parts:", parts)
         let len = parseInt(lenHex);
