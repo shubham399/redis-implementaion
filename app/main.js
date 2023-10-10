@@ -66,7 +66,6 @@ const keysHandler = (socket, data) => {
 const server = net.createServer((socket) => {
   const dataHandler = (buffer) => {
     const data = buffer.toString('utf-8').trim().split(/\s/).filter(a => a !== "").filter(a => a[0] !== "$");
-    console.log("🚀 ~ file: main.js:69 ~ dataHandler ~ data:", data)
     const command = data[1].toUpperCase()
     console.log('Request from', socket.remoteAddress, 'port', socket.remotePort, command);
     switch (command) {
