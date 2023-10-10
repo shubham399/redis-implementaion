@@ -45,8 +45,8 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
 
       data = data.substring(6); // Don't know what it is
       const parts = data.split(/00(?!FF)/);
+      console.log("🚀 ~ file: main.js:48 ~ parts:", parts)
       for (const part of parts) {
-        console.log("🚀 ~ file: main.js:48 ~ parts:", parts)
         let len = parseInt(lenHex);
         console.log("🚀 ~ file: main.js:50 ~ len:", len)
         console.log("🚀 ~ file: main.js:51 ~ data:", data)
