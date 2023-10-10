@@ -73,8 +73,9 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
       // Process FC + Data now
       while (dataPart.length > 0) {
         const flag = dataPart.substring(0, 2);// FC
+        console.log("🚀 ~ file: main.js:76 ~ flag:", flag)
         dataPart = dataPart.substring(2);// FC
-        let timeMS;
+        let timeMS = null;
         if (flag === "FC") {
           timeMS = dataPart.substring(0.16);// FC
           dataPart = dataPart.substring(16);// FC
