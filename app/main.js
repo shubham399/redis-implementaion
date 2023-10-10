@@ -29,7 +29,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
   data = data.replace(META, '');
   while (data.length > 0) {
     let op = data.substring(0, 2);
-    data = data.substring(2);
+    data = data.substring(2); // remove OP
     if (op === 'FA') {
       // Key
       let len = parseInt((data.substring(0, 2)));
