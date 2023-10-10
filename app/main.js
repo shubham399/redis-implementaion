@@ -53,8 +53,6 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
       data = data.substring(len * 2); // Select DB ?
       lenHex = data.substring(0, 2);
       len = parseInt(lenHex);
-      console.log("🚀 ~ file: main.js:55 ~ len:", len)
-      data = data.substring(2)
       data = data.substring(2)
       let value = Buffer.from(data.substring(0, len * 2), 'hex').toString('utf-8');
       data = data.substring(len * 2); // Select DB ?
