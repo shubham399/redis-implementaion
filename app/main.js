@@ -42,24 +42,24 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
 
     }
     else if (op === "FB") {
+
       data = data.substring(6); // Don't know what it is
-
-      const parts = data.split(/00(?=FF)/);
-      console.log("🚀 ~ file: main.js:48 ~ parts:", parts)
-
-      let lenHex = data.substring(0, 2);
-      let len = parseInt(lenHex);
-      console.log("🚀 ~ file: main.js:50 ~ len:", len)
-      console.log("🚀 ~ file: main.js:51 ~ data:", data)
-      data = data.substring(2)
-      let key = Buffer.from(data.substring(0, len * 2), 'hex').toString('utf-8');
-      data = data.substring(len * 2); // Select DB ?
-      lenHex = data.substring(0, 2);
-      len = parseInt(lenHex);
-      data = data.substring(2)
-      let value = Buffer.from(data.substring(0, len * 2), 'hex').toString('utf-8');
-      data = data.substring(len * 2); // Select DB ?
-      mem[key] = value;
+      const parts = inputHexString.split(/00(?!FF)/);
+      for (part of parts) {
+        console.log("🚀 ~ file: main.js:48 ~ parts:", parts)
+        let len = parseInt(lenHex);
+        console.log("🚀 ~ file: main.js:50 ~ len:", len)
+        console.log("🚀 ~ file: main.js:51 ~ data:", data)
+        data = data.substring(2)
+        let key = Buffer.from(data.substring(0, len * 2), 'hex').toString('utf-8');
+        data = data.substring(len * 2); // Select DB ?
+        lenHex = data.substring(0, 2);
+        len = parseInt(lenHex);
+        data = data.substring(2)
+        let value = Buffer.from(data.substring(0, len * 2), 'hex').toString('utf-8');
+        data = data.substring(len * 2); // Select DB ?
+        mem[key] = value;
+      }
     }
     else if (op === "FE") {
       data = data.substring(2);
