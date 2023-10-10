@@ -91,7 +91,16 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
         dataPart = dataPart.substring(2)
         let value = Buffer.from(dataPart.substring(0, len * 2), 'hex').toString('utf-8');
         dataPart = dataPart.substring(len * 2); // remove len
-        mem[key] = value;
+        if (timeMS) {
+          const current = new Date();
+          const dateObject = new Date(timeMS);
+          if (dateObject > current) {
+            mem[key] = value;
+          }
+
+        } else {
+          mem[key] = value;
+        }
         console.log("🚀 ~ file: main.js:83 ~ timeMS:", timeMS)
         console.log("🚀 ~ file: main.js:90 ~ key:", key)
         console.log("🚀 ~ file: main.js:95 ~ value:", value)
