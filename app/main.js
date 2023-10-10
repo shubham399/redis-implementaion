@@ -75,33 +75,40 @@ const keysHandler = (socket, data) => {
 }
 
 
+
+
+const commandHandler = (socket, command, value) => {
+  switch (command) {
+    case 'PING':
+      pingHandler(socket)
+      break;
+    case 'ECHO':
+      echoHandler(socket, value))
+      break;
+    case 'SET':
+      setHandler(socket, value))
+      break;
+    case 'KEYS':
+      keysHandler(socket, value))
+      break;
+    case 'GET':
+      getHandler(socket, value))
+      break;
+    case 'CONFIG':
+      getConfigHandler(socket, value))
+      break;
+    default:
+      socket.write("\n")
+  }
+}
+
 const server = net.createServer((socket) => {
   const dataHandler = (buffer) => {
     const data = buffer.toString('utf-8').trim().split(/\s/).filter(a => a !== "").filter(a => a[0] !== "$");
     const command = data[1].toUpperCase()
+    const value = data.slice(2);
     console.log('Request from', socket.remoteAddress, 'port', socket.remotePort, command);
-    switch (command) {
-      case 'PING':
-        pingHandler(socket)
-        break;
-      case 'ECHO':
-        echoHandler(socket, data.slice(2))
-        break;
-      case 'SET':
-        setHandler(socket, data.slice(2))
-        break;
-      case 'KEYS':
-        keysHandler(socket, data.slice(2))
-        break;
-      case 'GET':
-        getHandler(socket, data.slice(2))
-        break;
-      case 'CONFIG':
-        getConfigHandler(socket, data.slice(2))
-        break;
-      default:
-        socket.write("\n")
-    }
+    commandHandler(socket, command, value)
   }
 
 
