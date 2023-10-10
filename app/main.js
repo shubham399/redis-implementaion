@@ -83,19 +83,19 @@ const commandHandler = (socket, command, value) => {
       pingHandler(socket)
       break;
     case 'ECHO':
-      echoHandler(socket, value))
+      echoHandler(socket, value)
       break;
     case 'SET':
-      setHandler(socket, value))
+      setHandler(socket, value)
       break;
     case 'KEYS':
-      keysHandler(socket, value))
+      keysHandler(socket, value)
       break;
     case 'GET':
-      getHandler(socket, value))
+      getHandler(socket, value)
       break;
     case 'CONFIG':
-      getConfigHandler(socket, value))
+      getConfigHandler(socket, value)
       break;
     default:
       socket.write("\n")
