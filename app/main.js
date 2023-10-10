@@ -38,7 +38,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
     else if (op === "FB") {
       console.log("🚀 ~ file: main.js:49 ~ op:", op, data)
 
-      const dataLen = data.substring(2); // Don't know what it is
+      const dataLen = data.substring(0, 2); // Don't know what it is
       console.log("🚀 ~ file: main.js:42 ~ dataLen:", dataLen)
       data = data.substring(6); // Don't know what it is
       const lastFFIndex = data.lastIndexOf('FF');
