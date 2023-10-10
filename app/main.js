@@ -45,9 +45,11 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
 
       data = data.substring(6); // Don't know what it is
       const lastFFIndex = data.lastIndexOf('FF');
+      console.log("🚀 ~ file: main.js:48 ~ lastFFIndex:", lastFFIndex)
       const dataPart = data.substring(0, lastFFIndex);
       data = data.substring(lastFFIndex)
       const parts = dataPart.split('00')
+      console.log("🚀 ~ file: main.js:52 ~ parts:", parts)
 
       for (let part of parts) {
         let lenHex = part.substring(0, 2);
