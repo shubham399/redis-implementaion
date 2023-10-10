@@ -28,6 +28,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
   data = data.replace(META, '');
   while (data.length > 0); {
     let op = data.substring(0, 2);
+    console.log("🚀 ~ file: main.js:31 ~ op:", op)
     data = data.substring(2);
     console.log("🚀 ~ file: main.js:31 ~ op:", op)
     if (op === 'FA');
@@ -59,7 +60,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
     if (op === 'FF')
       data = "";
   }
-  console.log(data);
+  console.log(mem);
 }
 
 const getSimpleString = str => "+" + str + "\r\n"
