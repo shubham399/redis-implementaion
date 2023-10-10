@@ -31,10 +31,10 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
     let op = data.substring(0, 2);
     console.log("🚀 ~ file: main.js:31 ~ op:", op)
     data = data.substring(2);
-    if (op === 'FA');
-    {
+    if (op === 'FA') {
       // Key
       len = parseInt((data.substring(0, 2), 16));
+      console.log("🚀 ~ file: main.js:38 ~ len:", len)
       data = data.substring(2);
       data.substring(len)
       // Value
@@ -43,7 +43,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
       data.substring(len)
 
     }
-    if (op === "FB") {
+    else if (op === "FB") {
       data = data.substring(2); // Don't know what it is
       data = data.substring(4); // Select DB ?
       len = parseInt((data.substring(0, 2), 16));
@@ -54,10 +54,10 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
       data = data.substring(len); // Select DB ?
       mem[key] = value;
     }
-    if (op === "FE") {
+    else if (op === "FE") {
       data = data.substring(2);
     }
-    if (op === 'FF')
+    else if (op === 'FF')
       data = "";
   }
   console.log(mem);
