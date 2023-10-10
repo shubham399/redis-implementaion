@@ -65,7 +65,13 @@ const getConfigHandler = (socket, data) => {
 }
 const keysHandler = (socket, data) => {
   const keys = Object.keys(mem);
-  socket.write(getBulkStringReply("LOL"))
+  if (data[0] === "*") {
+    socket.write(getArrayReply(Object.values(keys)));
+  }
+  else {
+    const pattern = new RegExp(`${data[0]}`)
+    socket.write(getArrayReply(keys.filter(item => pattern.test(item))))
+  }
 }
 
 
