@@ -20,9 +20,45 @@ for (let i = 2; i < process.argv.length; i++) {
 
 const META = "524544495330303033"
 
+
+
+
 if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir'], options['dbfilename']))) {
-  let data = readFileSync(path.join(options['dir'], options['dbfilename'])).toString('hex');
+  let data = readFileSync(path.join(options['dir'], options['dbfilename'])).toString('hex').toUpperCase();
   data = data.replace(META, '');
+  while (data.length > 0); {
+    let op = data.substring(0, 2);
+    data = data.substring(2);
+    console.log("🚀 ~ file: main.js:31 ~ op:", op)
+    if (op === 'FA');
+    {
+      // Key
+      len = parseInt((data.substring(0, 2), 16));
+      data = data.substring(2);
+      data.substring(len)
+      // Value
+      len = parseInt((data.substring(0, 2), 16));
+      data = data.substring(2);
+      data.substring(len)
+
+    }
+    if (op === "FB") {
+      data = data.substring(2); // Don't know what it is
+      data = data.substring(4); // Select DB ?
+      len = parseInt((data.substring(0, 2), 16));
+      key = data.substring(0, len)
+      data = data.substring(len); // Select DB ?
+      len = parseInt((data.substring(0, 2), 16));
+      value = data.substring(0, len)
+      data = data.substring(len); // Select DB ?
+      mem[key] = value;
+    }
+    if (op === "FE") {
+      data = data.substring(2);
+    }
+    if (op === 'FF')
+      data = "";
+  }
   console.log(data);
 }
 
