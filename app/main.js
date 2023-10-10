@@ -41,9 +41,11 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
       const dataLen = data.substring(0, 2); // data table len (No idea)
       data = data.substring(2); // Don't know what it is
       const otherlen = data.substring(0, 2); // (Expiry Length)
+      data = data.substring(2); // Don't know what it is
       console.log("🚀 ~ file: main.js:42 ~ dataLen:", dataLen)
       console.log("🚀 ~ file: main.js:42 ~ dataLen:", otherlen)
-      data = data.substring(2); // Don't know what it is
+      const something = data.substring(0, 2); // (Expiry Length)
+      console.log("🚀 ~ file: main.js:49 ~ something:", something)
       data = data.substring(2); // Don't know what it is
       const lastFFIndex = data.lastIndexOf('FF');
       console.log("🚀 ~ file: main.js:48 ~ lastFFIndex:", lastFFIndex)
