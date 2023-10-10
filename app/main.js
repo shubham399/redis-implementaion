@@ -18,7 +18,7 @@ for (let i = 2; i < process.argv.length; i++) {
 }
 
 if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir'], options['dbfilename']))) {
-  console.log(readFileSync(path.join(options['dir'], options['dbfilename'])).toString())
+  console.log(readFileSync(path.join(options['dir'], options['dbfilename'])).toString('hex'))
 }
 
 const getSimpleString = str => "+" + str + "\r\n"
