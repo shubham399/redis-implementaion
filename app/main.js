@@ -31,17 +31,12 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
     let op = data.substring(0, 2);
     data = data.substring(2); // remove OP
     if (op === 'FA') {
-      // Key
-      let len = parseInt((data.substring(0, 2)));
-      data = data.substring(2);
-      data = data.substring(len * 2)
-      // Value
-      len = parseInt((data.substring(0, 2), 10));
-      data = data.substring(2);
-      data = data.substring(len * 2)
+      const parts = data.split('FE00')
+      data = parts[1];
 
     }
     else if (op === "FB") {
+      console.log("🚀 ~ file: main.js:49 ~ op:", op, data)
 
       data = data.substring(6); // Don't know what it is
       const lastFFIndex = data.lastIndexOf('FF');
@@ -53,12 +48,12 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
 
       for (let part of parts) {
         let lenHex = part.substring(0, 2);
-        let len = parseInt(lenHex);
+        let len = parseInt(lenHex, 16);
         part = part.substring(2)
         let key = Buffer.from(part.substring(0, len * 2), 'hex').toString('utf-8');
         part = part.substring(len * 2); // remove len
         lenHex = part.substring(0, 2);
-        len = parseInt(lenHex);
+        len = parseInt(lenHex, 16);
         part = part.substring(2)
         let value = Buffer.from(part.substring(0, len * 2), 'hex').toString('utf-8');
         part = part.substring(len * 2); // remove len
