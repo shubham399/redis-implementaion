@@ -26,33 +26,30 @@ const META = "524544495330303033"
 if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir'], options['dbfilename']))) {
   let data = readFileSync(path.join(options['dir'], options['dbfilename'])).toString('hex').toUpperCase();
   data = data.replace(META, '');
-  console.log("🚀 ~ file: main.js:29 ~ data:", data)
   while (data.length > 0) {
     let op = data.substring(0, 2);
-    console.log("🚀 ~ file: main.js:31 ~ op:", op)
     data = data.substring(2);
-    console.log("🚀 ~ file: main.js:34 ~ data:", data)
     if (op === 'FA') {
       // Key
       let len = parseInt((data.substring(0, 2), 16));
-      console.log("🚀 ~ file: main.js:38 ~ len:", len)
       data = data.substring(2);
-      data.substring(len)
+      data.substring(len * 2)
       // Value
       len = parseInt((data.substring(0, 2), 16));
       data = data.substring(2);
-      data.substring(len)
+      data.substring(len * 2)
 
     }
     else if (op === "FB") {
       data = data.substring(2); // Don't know what it is
       data = data.substring(4); // Select DB ?
       let len = parseInt((data.substring(0, 2), 16));
-      let key = Buffer.from(data.substring(0, len), 'hex').toString('utf-8');
-      data = data.substring(len); // Select DB ?
+      console.log("🚀 ~ file: main.js:51 ~ len:", len)
+      let key = Buffer.from(data.substring(0, len * 2), 'hex').toString('utf-8');
+      data = data.substring(len * 2); // Select DB ?
       len = parseInt((data.substring(0, 2), 16));
-      let value = Buffer.from(data.substring(0, len), 'hex').toString('utf-8');
-      data = data.substring(len); // Select DB ?
+      let value = Buffer.from(data.substring(0, len * 2), 'hex').toString('utf-8');
+      data = data.substring(len * 2); // Select DB ?
       mem[key] = value;
     }
     else if (op === "FE") {
