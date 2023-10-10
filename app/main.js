@@ -44,7 +44,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
       data = data.substring(2); // Don't know what it is
       const something = data.substring(0, 2); // (Expiry Length)
       const lastFFIndex = data.lastIndexOf('FF');
-      const dataPart = data.substring(0, lastFFIndex);
+      let dataPart = data.substring(0, lastFFIndex);
       console.log("🚀 ~ file: main.js:48 ~ dataPart:", dataPart)
       data = data.substring(lastFFIndex)
       // if (something === "00") {
