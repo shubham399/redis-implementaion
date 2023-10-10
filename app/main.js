@@ -27,13 +27,14 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
   let data = readFileSync(path.join(options['dir'], options['dbfilename'])).toString('hex').toUpperCase();
   data = data.replace(META, '');
   console.log("🚀 ~ file: main.js:29 ~ data:", data)
-  while (data.length > 0); {
+  while (data.length > 0) {
     let op = data.substring(0, 2);
     console.log("🚀 ~ file: main.js:31 ~ op:", op)
     data = data.substring(2);
+    console.log("🚀 ~ file: main.js:34 ~ data:", data)
     if (op === 'FA') {
       // Key
-      len = parseInt((data.substring(0, 2), 16));
+      let len = parseInt((data.substring(0, 2), 16));
       console.log("🚀 ~ file: main.js:38 ~ len:", len)
       data = data.substring(2);
       data.substring(len)
@@ -46,11 +47,11 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
     else if (op === "FB") {
       data = data.substring(2); // Don't know what it is
       data = data.substring(4); // Select DB ?
-      len = parseInt((data.substring(0, 2), 16));
-      key = data.substring(0, len)
+      let len = parseInt((data.substring(0, 2), 16));
+      let key = Buffer.from(data.substring(0, len), 'hex').toString('utf-8');
       data = data.substring(len); // Select DB ?
       len = parseInt((data.substring(0, 2), 16));
-      value = data.substring(0, len)
+      let value = Buffer.from(data.substring(0, len), 'hex').toString('utf-8');
       data = data.substring(len); // Select DB ?
       mem[key] = value;
     }
@@ -58,7 +59,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
       data = data.substring(2);
     }
     else if (op === 'FF')
-      data = "";
+      break;
   }
   console.log(mem);
 }
