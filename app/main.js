@@ -94,7 +94,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
         if (timeMS) {
           const current = new Date();
           console.log("🚀 ~ file: main.js:96 ~ current:", current)
-          const dateObject = new Date(timeMS);
+          const dateObject = new Date(parseInt(timeMS, 16));
           console.log("🚀 ~ file: main.js:97 ~ dateObject:", dateObject)
           if (dateObject > current) {
             mem[key] = value;
