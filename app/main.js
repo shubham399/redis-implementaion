@@ -46,28 +46,60 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
       console.log("🚀 ~ file: main.js:42 ~ dataLen:", otherlen)
       const something = data.substring(0, 2); // (Expiry Length)
       console.log("🚀 ~ file: main.js:49 ~ something:", something)
-      data = data.substring(2); // Don't know what it is
       const lastFFIndex = data.lastIndexOf('FF');
       console.log("🚀 ~ file: main.js:48 ~ lastFFIndex:", lastFFIndex)
       const dataPart = data.substring(0, lastFFIndex);
       data = data.substring(lastFFIndex)
-      // FB Data here
-      console.log("🚀 ~ file: main.js:67 ~ dataPart:", dataPart)
-      const parts = dataPart.split('00')
-      console.log("🚀 ~ file: main.js:52 ~ parts:", parts)
+      if (something === "00") {
+        dataPart.substring(2); // Remove 00
+        // FB Data here
+        console.log("🚀 ~ file: main.js:67 ~ dataPart:", dataPart)
+        const parts = dataPart.split('00')
+        console.log("🚀 ~ file: main.js:52 ~ parts:", parts)
+        for (let part of parts) {
+          let lenHex = part.substring(0, 2);
+          let len = parseInt(lenHex, 16);
+          part = part.substring(2)
+          let key = Buffer.from(part.substring(0, len * 2), 'hex').toString('utf-8');
+          part = part.substring(len * 2); // remove len
+          lenHex = part.substring(0, 2);
+          len = parseInt(lenHex, 16);
+          part = part.substring(2)
+          let value = Buffer.from(part.substring(0, len * 2), 'hex').toString('utf-8');
+          part = part.substring(len * 2); // remove len
+          mem[key] = value;
+        }
+      }
+      else {
+        // FB Data here
+        console.log("🚀 ~ file: main.js:67 ~ dataPart:", dataPart)
+        // Process FC + Data now
+        while (dataPart.length > 0) {
+          const flag = dataPart.substring(0, 2);// FC
+          dataPart = dataPart.substring(2);// FC
+          let timeMS;
+          if (flag === "FC") {
+            timeMS = dataPart.substring(0.16);// FC
+            dataPart = dataPart.substring(16);// FC
+          }
+          dataPart.substring(2);// Remove 00 delimiter
+          let lenHex = dataPart.substring(0, 2);
+          let len = parseInt(lenHex, 16);
+          dataPart = dataPart.substring(2)
+          let key = Buffer.from(dataPart.substring(0, len * 2), 'hex').toString('utf-8');
+          dataPart = dataPart.substring(len * 2); // remove len
+          lenHex = dataPart.substring(0, 2);
+          len = parseInt(lenHex, 16);
+          dataPart = dataPart.substring(2)
+          let value = Buffer.from(dataPart.substring(0, len * 2), 'hex').toString('utf-8');
+          dataPart = dataPart.substring(len * 2); // remove len
+          mem[key] = value;
+          console.log("🚀 ~ file: main.js:83 ~ timeMS:", timeMS)
+          console.log("🚀 ~ file: main.js:90 ~ key:", key)
+          console.log("🚀 ~ file: main.js:95 ~ value:", value)
 
-      for (let part of parts) {
-        let lenHex = part.substring(0, 2);
-        let len = parseInt(lenHex, 16);
-        part = part.substring(2)
-        let key = Buffer.from(part.substring(0, len * 2), 'hex').toString('utf-8');
-        part = part.substring(len * 2); // remove len
-        lenHex = part.substring(0, 2);
-        len = parseInt(lenHex, 16);
-        part = part.substring(2)
-        let value = Buffer.from(part.substring(0, len * 2), 'hex').toString('utf-8');
-        part = part.substring(len * 2); // remove len
-        mem[key] = value;
+        }
+
       }
     }
     else if (op === "FE") {
