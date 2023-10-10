@@ -18,7 +18,7 @@ for (let i = 2; i < process.argv.length; i++) {
 }
 
 
-const META = "524544495330303033fa72656469732d62697473c040fa0972656469732d76657205372e322e30"
+const META = "524544495330303033"
 
 if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir'], options['dbfilename']))) {
   let data = readFileSync(path.join(options['dir'], options['dbfilename'])).toString('hex');
