@@ -1,6 +1,7 @@
 'use strict';
 
 const net = require("net");
+const path = require("path");
 const mem = {};
 const options = {};
 
@@ -13,6 +14,10 @@ for (let i = 2; i < process.argv.length; i++) {
     const value = process.argv[i + 1]
     options[key] = value || true; // If there's no value, set it to true
   }
+}
+
+if (options['dir'] && options['dbfilename']) {
+  console.log(fs.readFile(path.join(options['dir'], options['dbfilename'])))
 }
 
 const getSimpleString = str => "+" + str + "\r\n"
