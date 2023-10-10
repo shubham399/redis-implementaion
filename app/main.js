@@ -1,6 +1,6 @@
 'use strict';
 
-const { readFileSync } = require("fs");
+const { readFileSync, existsSync } = require("fs");
 const net = require("net");
 const path = require("path");
 const mem = {};
@@ -17,7 +17,7 @@ for (let i = 2; i < process.argv.length; i++) {
   }
 }
 
-if (options['dir'] && options['dbfilename']) {
+if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir'], options['dbfilename']))) {
   console.log(readFileSync(path.join(options['dir'], options['dbfilename'])))
 }
 
