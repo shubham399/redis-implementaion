@@ -31,11 +31,11 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
     data = data.substring(2);
     if (op === 'FA') {
       // Key
-      let len = parseInt((data.substring(0, 2), 16));
+      let len = parseInt((data.substring(0, 2), 10));
       data = data.substring(2);
       data.substring(len * 2)
       // Value
-      len = parseInt((data.substring(0, 2), 16));
+      len = parseInt((data.substring(0, 2), 10));
       data = data.substring(2);
       data.substring(len * 2)
 
@@ -43,11 +43,11 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
     else if (op === "FB") {
       data = data.substring(2); // Don't know what it is
       data = data.substring(4); // Select DB ?
-      let len = parseInt((data.substring(0, 2), 16));
+      let len = parseInt((data.substring(0, 2), 10));
       console.log("🚀 ~ file: main.js:51 ~ len:", len)
       let key = Buffer.from(data.substring(0, len * 2), 'hex').toString('utf-8');
       data = data.substring(len * 2); // Select DB ?
-      len = parseInt((data.substring(0, 2), 16));
+      len = parseInt((data.substring(0, 2), 10));
       let value = Buffer.from(data.substring(0, len * 2), 'hex').toString('utf-8');
       data = data.substring(len * 2); // Select DB ?
       mem[key] = value;
