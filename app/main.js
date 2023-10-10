@@ -67,26 +67,26 @@ const server = net.createServer((socket) => {
   const dataHandler = (buffer) => {
     const data = buffer.toString('utf-8').trim().split(/\s/).filter(a => a !== "").filter(a => a[0] !== "$");
     console.log("🚀 ~ file: main.js:69 ~ dataHandler ~ data:", data)
-    const command = data[0].toUpperCase()
+    const command = data[2].toUpperCase()
     console.log('Request from', socket.remoteAddress, 'port', socket.remotePort, command);
     switch (command) {
       case 'PING':
         pingHandler(socket)
         break;
       case 'ECHO':
-        echoHandler(socket, data.slice(1))
+        echoHandler(socket, data.slice(2))
         break;
       case 'SET':
-        setHandler(socket, data.slice(1))
+        setHandler(socket, data.slice(2))
         break;
       case 'KEYS':
-        keysHandler(socket, data.slice(1))
+        keysHandler(socket, data.slice(2))
         break;
       case 'GET':
-        getHandler(socket, data.slice(1))
+        getHandler(socket, data.slice(2))
         break;
       case 'CONFIG':
-        getConfigHandler(socket, data.slice(1))
+        getConfigHandler(socket, data.slice(2))
         break;
       default:
         socket.write("\n")
