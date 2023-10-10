@@ -77,7 +77,7 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
         dataPart = dataPart.substring(2);// FC
         let timeMS = null;
         if (flag === "FC") {
-          timeMS = dataPart.substring(0.16);// FC
+          timeMS = dataPart.substring(0, 16);// FC
           dataPart = dataPart.substring(16);// FC
           dataPart.substring(2);// Remove 00 delimiter
         }
