@@ -38,9 +38,9 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
     else if (op === "FB") {
       console.log("🚀 ~ file: main.js:49 ~ op:", op, data)
 
-      const dataLen = data.substring(0, 2); // Don't know what it is
+      const dataLen = data.substring(0, 2); // data table len (No idea)
       data = data.substring(2); // Don't know what it is
-      const otherlen = data.substring(0, 2); // Don't know what it is
+      const otherlen = data.substring(0, 2); // (Expiry Length)
       console.log("🚀 ~ file: main.js:42 ~ dataLen:", dataLen)
       console.log("🚀 ~ file: main.js:42 ~ dataLen:", otherlen)
       data = data.substring(2); // Don't know what it is
@@ -49,6 +49,8 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
       console.log("🚀 ~ file: main.js:48 ~ lastFFIndex:", lastFFIndex)
       const dataPart = data.substring(0, lastFFIndex);
       data = data.substring(lastFFIndex)
+      // FB Data here
+      console.log("🚀 ~ file: main.js:67 ~ dataPart:", dataPart)
       const parts = dataPart.split('00')
       console.log("🚀 ~ file: main.js:52 ~ parts:", parts)
 
