@@ -42,8 +42,11 @@ if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir
 
     }
     else if (op === "FB") {
-      data = data.substring(2); // Don't know what it is
-      data = data.substring(4); // Select DB ?
+      data = data.substring(6); // Don't know what it is
+
+      const parts = data.split(/00(?=FF)/);
+      console.log("🚀 ~ file: main.js:48 ~ parts:", parts)
+
       let lenHex = data.substring(0, 2);
       let len = parseInt(lenHex);
       console.log("🚀 ~ file: main.js:50 ~ len:", len)
