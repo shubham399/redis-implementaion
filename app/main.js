@@ -26,11 +26,11 @@ const META = "524544495330303033"
 if (options['dir'] && options['dbfilename'] && existsSync(path.join(options['dir'], options['dbfilename']))) {
   let data = readFileSync(path.join(options['dir'], options['dbfilename'])).toString('hex').toUpperCase();
   data = data.replace(META, '');
+  console.log("🚀 ~ file: main.js:29 ~ data:", data)
   while (data.length > 0); {
     let op = data.substring(0, 2);
     console.log("🚀 ~ file: main.js:31 ~ op:", op)
     data = data.substring(2);
-    console.log("🚀 ~ file: main.js:31 ~ op:", op)
     if (op === 'FA');
     {
       // Key
